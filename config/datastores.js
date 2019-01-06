@@ -49,7 +49,8 @@ module.exports.datastores = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'sails-mongo',
-    url: 'mongodb://marcellmc:pypuavxc@localhost/shisha-mixology',
+    // url: 'mongodb://marcellmc:pypuavxc@localhost/shisha-mixology',
+    url: 'mongodb://localhost/shisha-mixology',
   },
 
 
