@@ -1,5 +1,5 @@
 /**
- * Blend.js
+ * Line.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,9 +13,12 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    strength: {
-      type: 'number',
-      max: 10
+    name: {
+      type: 'string'
+    },
+
+    description: {
+      type: 'string'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -27,18 +30,13 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    flavour: {
-      model: 'flavour',
+    manufacturer: {
+      model: 'manufacturer'
     },
     
-    line: {
-      model: 'line'
-    },
-
-    mixtures:{
-      collection: 'mixture',
-      via: 'blend',
-      through: 'component'
+    flavours: {
+      collection: 'blend',
+      via: 'line'
     }
   },
 

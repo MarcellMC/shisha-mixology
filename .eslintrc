@@ -42,7 +42,15 @@
     "_": true,
 
     // Models:
-    "User": true
+    "User": true,
+    "Manufacturer": true,
+    "Line": true,
+    "Flavour": true,
+    "Blend": true,
+    "Mixture": true,
+    "Component": true,
+    "Rate": true,
+    "Comment": true
     
     // …and any others.
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -67,7 +75,7 @@
       "ObjectExpression": 1,
       "ignoredNodes": ["ConditionalExpression"]
     }],
-    "linebreak-style":              ["error", "unix"],
+    "linebreak-style":              ["error", "windows"],
     "no-dupe-keys":                 ["error"],
     "no-duplicate-case":            ["error"],
     "no-extra-semi":                ["warn"],

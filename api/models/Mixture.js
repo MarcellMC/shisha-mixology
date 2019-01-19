@@ -18,10 +18,15 @@ module.exports = {
       required: true
     },
 
-    description: {
+    shortDescription: {
       type: 'string'
     },
 
+    recipe: {
+      type: 'string'
+    },
+
+    // Make it a model custom method
     rating: {
       type: 'number'
     },
@@ -42,7 +47,8 @@ module.exports = {
     },
 
     user: {
-      model: 'user'
+      model: 'user',
+      required: true
     }
   },
 

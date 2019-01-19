@@ -31,8 +31,8 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    blends: {
-      collection: 'blend',
+    lines: {
+      collection: 'line',
       via: 'manufacturer'
     }
   },
