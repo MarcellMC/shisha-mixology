@@ -33,7 +33,7 @@ module.exports = {
     manufacturer: {
       model: 'manufacturer'
     },
-    
+
     flavours: {
       collection: 'blend',
       via: 'line'

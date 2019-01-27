@@ -30,7 +30,7 @@ module.exports = {
     flavour: {
       model: 'flavour',
     },
-    
+
     line: {
       model: 'line'
     },

@@ -30,7 +30,7 @@ module.exports = {
     mixture: {
       model: 'mixture'
     },
-  
+
     blend: {
       model: 'blend'
     }
