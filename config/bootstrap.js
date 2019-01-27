@@ -15,7 +15,7 @@ module.exports.bootstrap = async function() {
   var path = require('path');
 
   // This bootstrap version indicates what version of fake data we're dealing with here.
-  var HARD_CODED_DATA_VERSION = 0;
+  var HARD_CODED_DATA_VERSION = 6;
 
   // This path indicates where to store/look for the JSON file that tracks the "last run bootstrap info"
   // locally on this development computer (if we happen to be on a development computer).
@@ -59,9 +59,58 @@ module.exports.bootstrap = async function() {
   }//∞
 
   // By convention, this is a good place to set up fake data during development.
-  await User.createEach([
-    { emailAddress: 'admin@example.com', fullName: 'Ryan Dahl', isSuperAdmin: true, password: await sails.helpers.passwords.hashPassword('abc123') },
-  ]);
+  let user;
+  let manufacturer;
+  let line;
+  let flavour;
+  let blend;
+  let mixture;
+
+  user = await User.create( {emailAddress: 'atomixer@example.com', fullName: 'Атомный мешатель', isSuperAdmin: false, password: await sails.helpers.passwords.hashPassword('pypuavxc')}).fetch();
+  mixture = await Mixture.create({name: 'Промискуитет', shortDescription: 'Умеренно крепкий микс для бодрых духом дам и джентельменов. Опьяняет ароматом экзотических фруктов. Цитрусовые ноты вкупе с клубничными прелестями и нотками корицы напомнят о самых приятных моментах половозрелой жизни.', user: user.id}).fetch();
+  manufacturer = await Manufacturer.create({name: 'Satyr', description: 'Пионер российского табачного крафта.'}).fetch();
+  line = await Line.create({name: 'High Aroma', description: 'Яркая ароматика.', manufacturer: manufacturer.id}).fetch();
+  flavour = await Flavour.create({name: 'Pussy Fruit', description: 'Сочный экстракт Питайя с цветочными ароматами. Вкусовые рецепторы вдохнут новую жизнь, а организм получит истинное наслаждение. Ваша чашка потечёт от удовольствия.', features: {taste: ['питайа', 'цветы']}}).fetch();
+  blend = await Blend.create({strength: 6, line: line.id, flavour: flavour.id}).fetch();
+  await Component.create({amount: 50, blend: blend.id, mixture: mixture.id});
+  manufacturer = await Manufacturer.create({name: 'Element', description: 'Открытие 2018го года.'}).fetch();
+  line = await Line.create({name: 'Вода', description: 'Линейка средней крепости.', manufacturer: manufacturer.id}).fetch();
+  flavour = await Flavour.create({name: 'Grapefruit and Pomelo', description: 'Грейпфрут и помело.', features: {taste: ['грейпфрут', 'помело', 'цитрус']}}).fetch();
+  blend = await Blend.create({strength: 7, line: line.id, flavour: flavour.id}).fetch();
+  await Component.create({amount: 20, blend: blend.id, mixture: mixture.id});
+  manufacturer = await Manufacturer.create({name: 'Serbetli', description: 'Знаменитые турки.'}).fetch();
+  line = await Line.create({name: '', description: '', manufacturer: manufacturer.id}).fetch();
+  flavour = await Flavour.create({name: 'Strawberry', description: 'Вкусная ароматная клубника.', features: {taste: ['клубника']}}).fetch();
+  blend = await Blend.create({strength: 3, line: line.id, flavour: flavour.id}).fetch();
+  await Component.create({amount: 20, blend: blend.id, mixture: mixture.id});
+  manufacturer = await Manufacturer.create({name: 'Nakhla', description: 'Легендарные египтяне. Делают средне-крепкую классику.'}).fetch();
+  line = await Line.create({name: 'Mix', description: '', manufacturer: manufacturer.id}).fetch();
+  flavour = await Flavour.create({name: 'Flames', description: 'Табак с нотами корицы, аниса и алкоголя.', features: {taste: ['корица', 'анис', 'алкоголь']}}).fetch();
+  blend = await Blend.create({strength: 5.5, line: line.id, flavour: flavour.id}).fetch();
+  await Component.create({amount: 10, blend: blend.id, mixture: mixture.id});
+
+  user = await User.create({emailAddress: 'marcell89@gmail.com', fullName: 'Марк Моисеев', isSuperAdmin: true, password: await sails.helpers.passwords.hashPassword('pypuavxc')}).fetch();
+  mixture = await Mixture.create({name: 'Двойной яблораас', shortDescription: 'Сильное кирпичегонное средство. Лечебный эффект гарантирован.', user: user.id}).fetch();
+  manufacturer = await Manufacturer.findOne({name: 'Nakhla'});
+  line = await Line.create({name: '', description: '', manufacturer: manufacturer.id}).fetch();
+  flavour = await Flavour.create({name: 'Double Apple', description: 'Классическое анисовое двойное яблоко.', features: {taste: ['яблоко', 'анис']}}).fetch();
+  blend = await Blend.create({strength: 5.5, line: line.id, flavour: flavour.id}).fetch();
+  await Component.create({amount: 50, blend: blend.id, mixture: mixture.id});
+  manufacturer = await Manufacturer.create({name: 'Afzal', description: 'Легендарные индусы. Pan Raas знают все.'}).fetch(); line = await Line.create({name: '', description: '', manufacturer: manufacturer.id}).fetch();
+  flavour = await Flavour.create({name: 'Pan Raas', description: 'Индийские пряности.', features: {taste: ['пряность', 'специи', 'мята']}}).fetch();
+  blend = await Blend.create({strength: 7, line: line.id, flavour: flavour.id}).fetch();
+  await Component.create({amount: 20, blend: blend.id, mixture: mixture.id});
+
+  user = await User.create({emailAddress: 'whorecrab@example.com', fullName: 'Шлюховатый отшельник', isSuperAdmin: false, password: await sails.helpers.passwords.hashPassword('pypuavxc')}).fetch();
+  mixture = await Mixture.create({name: 'Ядреный мангустин', shortDescription: 'Вся пряная мощь Азии в одном миксе. Вызывает привыкание.', user: user.id}).fetch();
+
+  user = await User.create({emailAddress: 'fatramp@example.com', fullName: 'Вздутый батут', isSuperAdmin: false, password: await sails.helpers.passwords.hashPassword('pypuavxc')}).fetch();
+  mixture = await Mixture.create({name: 'Черничная смородина', shortDescription: 'Кисло-ягодная дым-завеса для девочек и слабонервных.', user: user.id}).fetch();
+
+  manufacturer = await Manufacturer.create({name: 'Tangiers', description: 'Легендарные американцы. Производят одни из лучших крепких табаков на планете.'}).fetch();
+  line = await Line.create({name: 'Noir', description: 'Оригинальная крепкая линейка.', manufacturer: manufacturer.id}).fetch();
+  flavour = await Flavour.create({name: 'Cane Mint', description: 'Сладкая мята.', features: {taste: ['мята']}}).fetch();
+  blend = await Blend.create({strength: 7, line: line.id, flavour: flavour.id}).fetch();
 
   // Save new bootstrap version
   await sails.helpers.fs.writeJson.with({
