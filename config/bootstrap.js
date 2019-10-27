@@ -109,7 +109,7 @@ module.exports.bootstrap = async function() {
 
   manufacturer = await Manufacturer.create({name: 'Tangiers', description: 'Легендарные американцы. Производят одни из лучших крепких табаков на планете.'}).fetch();
   line = await Line.create({name: 'Noir', description: 'Оригинальная крепкая линейка.', manufacturer: manufacturer.id}).fetch();
-  flavour = await Flavour.create({name: 'Cane Mint', description: 'Сладкая мята.', features: {taste: ['мята']}}).fetch();
+  flavour = await Flavour.create({name: 'Cane Mint', description: 'Сладкая мята.', features: {'taste': ['мята']}}).fetch();
   blend = await Blend.create({strength: 7, line: line.id, flavour: flavour.id}).fetch();
 
   // Save new bootstrap version

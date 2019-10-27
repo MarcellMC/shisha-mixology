@@ -1,0 +1,45 @@
+<div id="top-mixtures" v-cloak>
+  <div class="container">
+    <h1>Добро пожаловать!</h1>
+    <h2>Начните работу с вашими миксами</h2>
+    <hr/>
+    <div class="accordion list-group" id="topMixtures" style="width: 36rem;">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Лучшие кальянные миксы</h5>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Популярные</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Новые</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Собственные</a>
+            </li>
+          </ul>
+        </div>
+        
+        <div v-for="mixture in mixtures">
+          <div class="card-header container" id="headingFour">
+            <button class="list-group-item list-group-item-action collapsed row" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+              <h5 class="card-title col align-self-start">{{mixture.name}}</h5>
+              <h6 class="card-subtitle text-muted col align-self-start">{{mixture.user.fullName}}</h6>
+              <p class="col align-self-end">Рейтинг: {{mixture.rating}} (голосов: 0)</p>
+            </button>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#topMixtures">
+            <div class="card-body">
+              <p class="card-text">{{mixture.shortDescription}}</p>
+                <a href="#" class="card-link">Смотреть рецепт</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <a href="#" class="btn btn-primary">Создать свой микс</a>
+
+  </div>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

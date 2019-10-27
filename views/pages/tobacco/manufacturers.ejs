@@ -1,0 +1,106 @@
+<div id="manufacturers" v-cloak>
+  <div class="container">
+    <h1>Табачные смеси</h1>
+    <button type="button" class="btn btn-secondary" @click="clickAddManufacturer()">Добавить производителя</button>
+    <p></p>
+
+    <div :key="manufacturer.name" v-for="manufacturer in manufacturers" class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{manufacturer.name}}</h5>
+        <p class="card-subtitle"><em>{{manufacturer.description}}</em></p>
+        <button type="button" class="btn btn-link" @click="clickAddLine(manufacturer)">Добавить линейку</button>
+        <ul v-for="line in manufacturer.lines" class="list-group">
+          <li class="list-group-item">
+            <h6 v-if="line.name != ''">Линейка {{line.name}}</h6>
+            <button type="button" class="btn btn-link" @click="clickAddBlend(line, manufacturer)">Добавись вкус</button>
+            <li v-for="blend in line.blends" class="list-group-item">{{blend.flavour.name}}</li>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <% /* "Add Manufacturer" Modal */ %>
+    <modal class="modal" v-if="addManufacturerModalOpen" v-cloak key="new" @close="closeAddManufacturerModal()">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить производителя</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <ajax-form action="addManufacturer" @submitted="submittedAddManufacturerForm($event)" :syncing.sync="syncing" :cloud-error.sync="cloudError" :handle-parsing="handleParsingAddManufacturerForm">  
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Название фирмы" v-model="addManufacturerFormData.name" aria-label="Brand name">
+            <textarea class="form-control" placeholder="Описание" v-model="addManufacturerFormData.description" aria-label="Description"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </ajax-form>
+    </modal>
+
+    <% /* "Add Line" Modal */ %>
+    <modal class="modal" v-if="addLineModalOpen" v-cloak key="new" @close="closeAddLineModal()">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить линейку</h5>
+        <h6>{{this.selectedManufacturer.name}}</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <ajax-form action="addLine" :syncing.sync="syncing" :cloud-error.sync="cloudError" :handle-parsing="handleParsingAddLineForm" @submitted="submittedAddLineForm($event)" >  
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Название линейки" v-model="addLineFormData.name" aria-label="Line name">
+            <textarea class="form-control" placeholder="Описание" v-model="addLineFormData.description" aria-label="Description"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <ajax-button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</ajax-button>
+          <ajax-button type="submit" :syncing="syncing" class="btn btn-primary">Сохранить</ajax-button>
+        </div>
+      </ajax-form>
+    </modal>
+
+    <% /* "Add Blend" Modal */ %>
+    <modal class="modal" v-if="addBlendModalOpen" v-cloak key="new" @close="closeAddBlendModal()">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить табачную смесь</h5>
+        <h6>{{this.selectedManufacturer.name}}<span v-if="this.selectedLine.name != ''"> - {{this.selectedLine.name}}</span></h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <ajax-form action="addBlend" :syncing.sync="syncing" :cloud-error.sync="cloudError" :handle-parsing="handleParsingAddBlendForm" @submitted="submittedAddBlendForm($event)">  
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Имя вкуса" v-model="addBlendFormData.flavourName" aria-label="Flavour name">
+          </div>
+          <div class="input-group mb-3">
+            <textarea class="form-control" placeholder="Описание" v-model="addBlendFormData.flavourDescription" aria-label="Description"></textarea>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Крепость" v-model="addBlendFormData.blendStrength" aria-label="Blend strength">
+          </div>
+          <div class="input-group mb-3">
+            <label for="flavour-features">Особенности вкуса</label>
+            <em>Пример: яблоко, анис</em>
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="taste">Вкусовая характеристика</span>
+              <input type="text" id="flavour-features" class="form-control" v-model="addBlendFormData.flavourFeatures" aria-label="Flavour features" aria-describedby="taste">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <ajax-button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</ajax-button>
+          <ajax-button type="submit" :syncing="syncing" class="btn btn-primary">Сохранить</ajax-button>
+        </div>
+      </ajax-form>
+    </modal>
+
+  </div>
+</div>
+
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
