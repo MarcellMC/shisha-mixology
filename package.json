@@ -11,7 +11,7 @@
     "ajv": "^6.7.0",
     "sails": "^1.1.0",
     "sails-hook-apianalytics": "^2.0.3",
-    "sails-hook-organics": "^0.15.0",
+    "sails-hook-organics": "^2.2.1",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^1.5.5",
     "sails-mongo": "^1.0.1"
