@@ -13,7 +13,7 @@
     "sails-hook-apianalytics": "^2.0.3",
     "sails-hook-organics": "^0.15.0",
     "sails-hook-orm": "^2.1.1",
-    "sails-hook-sockets": "^1.5.5",
+    "sails-hook-sockets": "^2.0.3",
     "sails-mongo": "^1.0.1"
   },
   "devDependencies": {
